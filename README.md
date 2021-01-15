@@ -1,2 +1,42 @@
-# terraform-aws-ec2-spot-price
-An easy way to always have a fresh Spot Instance price
+[![FivexL](https://releases.fivexl.io/fivexlbannergit.jpg)](https://fivexl.io/)
+
+# AWS EC2 Spot Price Terraform module
+An easy way to always have a fresh Spot Instance price  
+Set the instance type and its family (Linux/UNIX or )
+specify the type of instance and its family. Linux / Windows.
+
+## Amazon EC2 Pricing
+- [On-Demand](https://aws.amazon.com/ec2/pricing/on-demand/)
+- [Spot Instances](https://aws.amazon.com/ec2/spot/pricing/)
+- [Savings Plans](https://aws.amazon.com/savingsplans/)
+- [Reserved Instances](https://aws.amazon.com/ec2/pricing/reserved-instances/)
+- [Dedicated Hosts](https://aws.amazon.com/ec2/dedicated-hosts/pricing/)
+
+## Requirements
+
+| Name | Version |
+|------|---------|
+| terraform | >= 0.13 |
+| aws | >= 3.13.0 |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| instance_type | The type of instance | `string` |  | yes |
+| availability_zones_names_list | The list with AZs names | `list(string)` |  | yes |
+| product_description | The product description for the Spot price (Linux/UNIX | Red Hat Enterprise Linux | SUSE Linux | Windows | Linux/UNIX (Amazon VPC) | Red Hat Enterprise Linux (Amazon VPC) | SUSE Linux (Amazon VPC) | Windows (Amazon VPC)). | `list(string)` | `"Linux/UNIX"` | no |
+| custom_max_price_modifier | Modifier for getting custom prices. Must be between 1 and 2. Values greater than 1.7 will often not make sense. Because it will be equal or greater than on-demand price. | `number` | `1.05` | no |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| spot_price_min | Minimum spot price within all AZ. This behavior does not guarantee the launch of the instance in all AZ. Can be used as a way to get the lowest possible price. |
+| spot_price_max | Recommended use. Maximum spot price within all AZ. This behavior guarantees start the instance in all AZ. This is the maximum price from the list of spot prices. |
+| spot_price_over | The maximum spot price within all AZs multiplied by the `custom_max_price_modifier`. Instance at this price can be launched in any in all AZ. This behavior can add stability in the event of price increases and frequent demand. |
+| spot_price_avg | Average price within all AZ. This behavior guarantees the launch of an instance in at least one AZ, but does not guarantee launch in all AZ. Can be used as a balance between stability and price. |
+
+## License
+
+Apache 2 Licensed. See LICENSE for full details.
