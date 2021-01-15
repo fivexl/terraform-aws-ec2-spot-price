@@ -2,8 +2,7 @@
 
 # AWS EC2 Spot Price Terraform module
 An easy way to always have a fresh Spot Instance price  
-Set the instance type and its family (Linux/UNIX or )
-specify the type of instance and its family. Linux / Windows.
+Set the instance type and its family (Linux/UNIX or Windows)
 
 ## Amazon EC2 Pricing
 - [On-Demand](https://aws.amazon.com/ec2/pricing/on-demand/)

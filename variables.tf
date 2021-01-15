@@ -12,10 +12,18 @@ variable "product_description" {
   description = "The product description for the Spot price (Linux/UNIX | Red Hat Enterprise Linux | SUSE Linux | Windows | Linux/UNIX (Amazon VPC) | Red Hat Enterprise Linux (Amazon VPC) | SUSE Linux (Amazon VPC) | Windows (Amazon VPC))."
   type        = string
   default     = "Linux/UNIX"
+  validation {
+    condition     = contains(["Linux/UNIX", "Red Hat Enterprise Linux", "SUSE Linux", "Windows", "Linux/UNIX (Amazon VPC)", "Red Hat Enterprise Linux (Amazon VPC)", "SUSE Linux (Amazon VPC)", "Windows (Amazon VPC)"], var.product_description)
+    error_message = "The product description for the Spot price (Linux/UNIX | Red Hat Enterprise Linux | SUSE Linux | Windows | Linux/UNIX (Amazon VPC) | Red Hat Enterprise Linux (Amazon VPC) | SUSE Linux (Amazon VPC) | Windows (Amazon VPC))."
+  }
 }
 
 variable "custom_max_price_modifier" {
   description = "Modifier for getting custom prices. Must be between 1 and 2. Values greater than 1.7 will often not make sense. Because it will be equal or greater than on-demand price."
   type        = number
   default     = 1.05
+  validation {
+    condition     = var.custom_max_price_modifier >= 1 && var.custom_max_price_modifier <= 2
+    error_message = "Modifier for getting custom prices. Must be between 1 and 2. Values greater than 1.7 will often not make sense. Because it will be equal or greater than on-demand price."
+  }
 }

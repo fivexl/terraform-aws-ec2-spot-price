@@ -14,6 +14,7 @@ locals {
 module "spot-price" {
   source                        = "../../"
   availability_zones_names_list = local.azs_list
+  product_description           = "Linux/UNIX"
   instance_type                 = "c5.4xlarge"
   custom_max_price_modifier     = 1.03
 }
