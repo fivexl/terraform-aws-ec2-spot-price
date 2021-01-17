@@ -3,7 +3,7 @@ data "aws_ec2_spot_price" "this" {
   instance_type = var.instance_type
   filter {
     name   = "product-description"
-    values = [var.product_description]
+    values = var.product_description_list
   }
   filter {
     name   = "availability-zone"

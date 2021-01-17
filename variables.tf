@@ -8,14 +8,10 @@ variable "availability_zones_names_list" {
   type        = list(string)
 }
 
-variable "product_description" {
+variable "product_description_list" {
   description = "The product description for the Spot price (Linux/UNIX | Red Hat Enterprise Linux | SUSE Linux | Windows | Linux/UNIX (Amazon VPC) | Red Hat Enterprise Linux (Amazon VPC) | SUSE Linux (Amazon VPC) | Windows (Amazon VPC))."
-  type        = string
-  default     = "Linux/UNIX"
-  validation {
-    condition     = contains(["Linux/UNIX", "Red Hat Enterprise Linux", "SUSE Linux", "Windows", "Linux/UNIX (Amazon VPC)", "Red Hat Enterprise Linux (Amazon VPC)", "SUSE Linux (Amazon VPC)", "Windows (Amazon VPC)"], var.product_description)
-    error_message = "The product description for the Spot price (Linux/UNIX | Red Hat Enterprise Linux | SUSE Linux | Windows | Linux/UNIX (Amazon VPC) | Red Hat Enterprise Linux (Amazon VPC) | SUSE Linux (Amazon VPC) | Windows (Amazon VPC))."
-  }
+  type        = list(string)
+  default     = ["Linux/UNIX", "Linux/UNIX (Amazon VPC)"]
 }
 
 variable "custom_max_price_modifier" {

@@ -3,7 +3,7 @@
 # AWS EC2 Spot Price Terraform module
 An easy way to get the best Spot Instance price.
 
-```
+```hlc
 data "aws_ami" "ubuntu" {
   most_recent = true
 
@@ -62,7 +62,7 @@ resource "aws_spot_instance_request" "spot" {
 |------|-------------|------|---------|:--------:|
 | instance_type | The type of instance | `string` |  | yes |
 | availability_zones_names_list | The list with AZs names | `list(string)` |  | yes |
-| product_description | The product description for the Spot price (Linux/UNIX, Red Hat Enterprise Linux , SUSE Linux , Windows , Linux/UNIX (Amazon VPC) , Red Hat Enterprise Linux (Amazon VPC) , SUSE Linux (Amazon VPC) , Windows (Amazon VPC)). | `list(string)` | `"Linux/UNIX"` | no |
+| product_description_list | The product description list for the Spot price (Linux/UNIX, Red Hat Enterprise Linux , SUSE Linux , Windows , Linux/UNIX (Amazon VPC) , Red Hat Enterprise Linux (Amazon VPC) , SUSE Linux (Amazon VPC) , Windows (Amazon VPC)). | `list(string)` | `"Linux/UNIX"` | no |
 | custom_max_price_modifier | Modifier for getting custom prices. Must be between 1 and 2. Values greater than 1.7 will often not make sense. Because it will be equal or greater than on-demand price. | `number` | `1.05` | no |
 
 ## Outputs
