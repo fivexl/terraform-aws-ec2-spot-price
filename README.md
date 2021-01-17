@@ -1,8 +1,46 @@
 [![FivexL](https://releases.fivexl.io/fivexlbannergit.jpg)](https://fivexl.io/)
 
 # AWS EC2 Spot Price Terraform module
-An easy way to always have a fresh Spot Instance price  
-Set the instance type and its family (Linux/UNIX or Windows)
+An easy way to get the best Spot Instance price.
+
+```
+data "aws_ami" "ubuntu" {
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  owners = ["099720109477"] # Canonical
+}
+
+data "aws_availability_zones" "available" {
+  state = "available"
+}
+
+locals {
+  instance_type = "t3a.xlarge"
+}
+
+module "ec2_spot_price" {
+  source                        = "fivexl/ec2-spot-price/aws"
+  version                       = "1.0.1"
+  instance_type                 = local.instance_type
+  availability_zones_names_list = data.aws_availability_zones.available.names
+}
+
+resource "aws_spot_instance_request" "spot" {
+  ami           = data.aws_ami.ubuntu.id
+  spot_price    = module.ec2_spot_price.spot_price_max
+  instance_type = local.instance_type
+}
+```
 
 ## Amazon EC2 Pricing
 - [On-Demand](https://aws.amazon.com/ec2/pricing/on-demand/)
