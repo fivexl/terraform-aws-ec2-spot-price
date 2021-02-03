@@ -23,3 +23,13 @@ variable "custom_max_price_modifier" {
     error_message = "Modifier for getting custom prices. Must be between 1 and 2. Values greater than 1.7 will often not make sense. Because it will be equal or greater than on-demand price."
   }
 }
+
+variable "normalization_modifier" {
+  description = "Modifier for price normalization (rounded up / ceil). Helps to avoid small price fluctuations. Must be 10, 100, 1000 or 10000."
+  type        = number
+  default     = 1000
+  validation {
+    condition     = contains([10, 100, 1000, 10000], var.normalization_modifier)
+    error_message = "Modifier for price normalization must be 10, 100, 1000 or 10000."
+  }
+}

@@ -17,6 +17,7 @@ module "spot-price" {
   product_description_list      = ["Linux/UNIX", "Linux/UNIX (Amazon VPC)"]
   instance_type                 = "c5.4xlarge"
   custom_max_price_modifier     = 1.03
+  normalization_modifier        = 1000
 }
 
 output "spot_price_min" {
@@ -33,4 +34,20 @@ output "spot_price_over" {
 
 output "spot_price_avg" {
   value = module.spot-price.spot_price_avg
+}
+
+output "spot_price_min_raw" {
+  value = module.spot-price.spot_price_min_raw
+}
+
+output "spot_price_max_raw" {
+  value = module.spot-price.spot_price_max_raw
+}
+
+output "spot_price_over_raw" {
+  value = module.spot-price.spot_price_over_raw
+}
+
+output "spot_price_avg_raw" {
+  value = module.spot-price.spot_price_avg_raw
 }
