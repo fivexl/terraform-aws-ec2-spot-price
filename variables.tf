@@ -1,6 +1,26 @@
-variable "instance_type" {
-  description = "The type of instance"
-  type        = string
+variable "instance_types_list" {
+  description = "List of instance types. If not default will overwrite `instance_types_weighted_map`. "
+  type        = list(string)
+  default     = []
+}
+
+variable "instance_types_weighted_map" {
+  description = "Map of instance types and their weight. Conflict with `instance_types_list`"
+  type = list(object({
+    instance_type     = string
+    weighted_capacity = string
+  }))
+  default = [{ instance_type = "t3.micro", weighted_capacity = "1" }]
+}
+
+variable "instance_weight_default" {
+  description = "Default number of capacity units for all instance types."
+  type        = number
+  default     = 1
+  validation {
+    condition     = var.instance_weight_default >= 1 && var.instance_weight_default <= 999
+    error_message = "Value must be in the range of 1 to 999."
+  }
 }
 
 variable "availability_zones_names_list" {

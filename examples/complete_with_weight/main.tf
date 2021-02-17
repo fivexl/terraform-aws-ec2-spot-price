@@ -14,10 +14,17 @@ locals {
 module "spot-price" {
   source                        = "../../"
   availability_zones_names_list = local.azs_list
-  instance_types_list           = ["c5.4xlarge", "c5a.4xlarge"]
-  product_description_list      = ["Linux/UNIX", "Linux/UNIX (Amazon VPC)"]
-  custom_max_price_modifier     = 1.03
-  normalization_modifier        = 1000
+  instance_types_weighted_map = [
+    { instance_type = "c5.2xlarge", weighted_capacity = "2" },
+    { instance_type = "c5.4xlarge", weighted_capacity = "4" },
+    { instance_type = "c5.4xlarge", weighted_capacity = "12" },
+    { instance_type = "c5a.2xlarge", weighted_capacity = "2" },
+    { instance_type = "c5a.4xlarge", weighted_capacity = "4" },
+    { instance_type = "c5a.4xlarge", weighted_capacity = "12" }
+  ]
+  product_description_list  = ["Linux/UNIX", "Linux/UNIX (Amazon VPC)"]
+  custom_max_price_modifier = 1.03
+  normalization_modifier    = 1000
 }
 
 output "spot_price_at_least_one_type_per_az" {
