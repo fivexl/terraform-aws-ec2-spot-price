@@ -17,10 +17,10 @@ module "spot-price" {
   instance_types_weighted_map = [
     { instance_type = "c5.2xlarge", weighted_capacity = "2" },
     { instance_type = "c5.4xlarge", weighted_capacity = "4" },
-    { instance_type = "c5.4xlarge", weighted_capacity = "12" },
+    { instance_type = "c5.12xlarge", weighted_capacity = "12" },
     { instance_type = "c5a.2xlarge", weighted_capacity = "2" },
     { instance_type = "c5a.4xlarge", weighted_capacity = "4" },
-    { instance_type = "c5a.4xlarge", weighted_capacity = "12" }
+    { instance_type = "c5a.12xlarge", weighted_capacity = "12" }
   ]
   product_description_list = ["Linux/UNIX", "Linux/UNIX (Amazon VPC)"]
   custom_price_modifier    = 1.03
