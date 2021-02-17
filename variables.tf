@@ -5,7 +5,7 @@ variable "instance_types_list" {
 }
 
 variable "instance_types_weighted_map" {
-  description = "Map of instance types and their weight. Conflict with `instance_types_list`"
+  description = "Map of instance_type and their weighted_capacity. Conflict with `instance_types_list`"
   type = list(object({
     instance_type     = string
     weighted_capacity = string
@@ -34,12 +34,12 @@ variable "product_description_list" {
   default     = ["Linux/UNIX", "Linux/UNIX (Amazon VPC)"]
 }
 
-variable "custom_max_price_modifier" {
+variable "custom_price_modifier" {
   description = "Modifier for getting custom prices. Must be between 1 and 2. Values greater than 1.7 will often not make sense. Because it will be equal or greater than on-demand price."
   type        = number
   default     = 1.05
   validation {
-    condition     = var.custom_max_price_modifier >= 1 && var.custom_max_price_modifier <= 2
+    condition     = var.custom_price_modifier >= 1 && var.custom_price_modifier <= 2
     error_message = "Modifier for getting custom prices. Must be between 1 and 2. Values greater than 1.7 will often not make sense. Because it will be equal or greater than on-demand price."
   }
 }

@@ -16,54 +16,30 @@ module "spot-price" {
   availability_zones_names_list = local.azs_list
   instance_types_list           = ["c5.4xlarge", "c5a.4xlarge"]
   product_description_list      = ["Linux/UNIX", "Linux/UNIX (Amazon VPC)"]
-  custom_max_price_modifier     = 1.03
+  custom_price_modifier         = 1.03
   normalization_modifier        = 1000
 }
 
-output "spot_price_at_least_one_type_per_az" {
-  value = module.spot-price.spot_price_at_least_one_type_per_az
+output "spot_price_current_max" {
+  value = module.spot-price.spot_price_current_max
 }
 
-output "spot_price_at_least_one_type_per_az_over" {
-  value = module.spot-price.spot_price_at_least_one_type_per_az_over
+output "spot_price_current_max_mod" {
+  value = module.spot-price.spot_price_current_max_mod
 }
 
-output "spot_price_all_types_all_az" {
-  value = module.spot-price.spot_price_all_types_all_az
+output "spot_price_current_min" {
+  value = module.spot-price.spot_price_current_min
 }
 
-output "spot_price_cheapest" {
-  value = module.spot-price.spot_price_cheapest
+output "spot_price_current_min_mod" {
+  value = module.spot-price.spot_price_current_min_mod
 }
 
-output "spot_price_avg" {
-  value = module.spot-price.spot_price_avg
+output "spot_price_current_optimal" {
+  value = module.spot-price.spot_price_current_optimal
 }
 
-output "spot_price_all_types_all_az_over" {
-  value = module.spot-price.spot_price_all_types_all_az_over
-}
-
-output "spot_price_at_least_one_type_per_az_raw" {
-  value = module.spot-price.spot_price_at_least_one_type_per_az_raw
-}
-
-output "spot_price_at_least_one_type_per_az_over_raw" {
-  value = module.spot-price.spot_price_at_least_one_type_per_az_over_raw
-}
-
-output "spot_price_all_types_all_az_raw" {
-  value = module.spot-price.spot_price_all_types_all_az_raw
-}
-
-output "spot_price_all_types_all_az_over_raw" {
-  value = module.spot-price.spot_price_all_types_all_az_over_raw
-}
-
-output "spot_price_cheapest_raw" {
-  value = module.spot-price.spot_price_cheapest_raw
-}
-
-output "spot_price_avg_raw" {
-  value = module.spot-price.spot_price_avg_raw
+output "spot_price_current_optimal_mod" {
+  value = module.spot-price.spot_price_current_optimal_mod
 }
