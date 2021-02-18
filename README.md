@@ -25,13 +25,13 @@ data "aws_availability_zones" "available" {
 }
 
 locals {
-  instance_type = "t3a.xlarge"
+  instance_types_list = ["t3a.xlarge"]
 }
 
 module "ec2_spot_price" {
   source                        = "fivexl/ec2-spot-price/aws"
   version                       = "2.0.0"
-  instance_types_list           = [local.instance_type]
+  instance_types_list           = local.instance_types_list
   availability_zones_names_list = data.aws_availability_zones.available.names
 }
 
