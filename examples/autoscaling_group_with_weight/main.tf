@@ -58,9 +58,10 @@ resource "aws_autoscaling_group" "this" {
     instances_distribution {
       on_demand_base_capacity                  = 0
       on_demand_percentage_above_base_capacity = 0
-      spot_allocation_strategy                 = "capacity-optimized"
+      spot_allocation_strategy                 = "lowest-price"
+      spot_instance_pools                      = 10
       #spot_max_price                           = module.spot-price.spot_price_current_max
-      spot_max_price = module.spot-price.spot_price_current_optimal
+      spot_max_price                           = module.spot-price.spot_price_current_optimal
       #spot_max_price                           = module.spot-price.spot_price_current_min
     }
   }
